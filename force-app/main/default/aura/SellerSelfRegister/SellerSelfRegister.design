@@ -1,0 +1,4 @@
+<design:component label="Atonit Marketplace Seller Self Register">
+	<design:attribute name="startUrl"/>
+    <design:attribute name="regConfirmUrl" default="./CheckPasswordResetEmail"/>
+</design:component>

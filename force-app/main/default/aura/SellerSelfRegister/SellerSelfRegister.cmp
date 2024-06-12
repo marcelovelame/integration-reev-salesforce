@@ -1,0 +1,315 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes"  controller="SellerSelfRegisterController" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.initialize}"/>    
+    <aura:attribute name="accountId" type="String" required="false" access="public" description="accountId for creating the user. If not specified, it will create a PersonAccount if possible for B2C scenario. Or otherwise if it's in a community, the community's self-registration accountId will be used."/>
+    <aura:attribute name="regConfirmUrl" type="String" required="true"/>
+    <aura:attribute name="startUrl" type="String" required="false" description="The url you go to after a successful login" />
+    <aura:attribute name="showError" type="Boolean" required="true" description="" default="false" access="private"/>
+    <aura:attribute name="errorMessage" type="String" required="false" description="" access="private"/>
+    <aura:attribute name="errorMessageModal" type="String" required="false" description="" access="private"/>
+    <aura:attribute name="expid" type="String" required="false" description="The branding experience ID" />  
+    <aura:attribute name="ActividadEconomicaOptions" type="List" required="false" default=""/>  
+    <aura:attribute name="loggedUserSt" type="String" required="false" default="Approved" access="private"/>
+    <aura:attribute name="reprovedMessage" type="String" required="false" default="" access="private"/>
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:attribute name="isModalOpenPassword" type="boolean" default="false"/>
+    <aura:attribute name="sellerId" type="String" required="false" default="" access="private"/>
+    <aura:attribute name="fieldsHelpText" type="Map" required="false" default="" access="private"/>
+   
+  
+    <div class="sfdc_wrap">
+        <div class="sfdc_form_wrap">                        
+            
+             <aura:if isTrue="{! v.loggedUserSt == 'notlogged' || v.loggedUserSt == 'Not Approved' || v.loggedUserSt == 'Draft'  }">
+                
+                <div class="cont-register">
+                    <aura:if isTrue="{!v.loggedUserSt == 'Not Approved'}">
+                        <div class="cont-forms not-approved">
+                            <h1>{!$Label.Atonit_Mktplace.Registration_not_approved}</h1>
+                            <aura:If isTrue="{!v.reprovedMessage != ''}">
+                                {!$Label.Atonit_Mktplace.Please_check_the_following_information}                                
+                                <p><lightning:formattedRichText value="{!v.reprovedMessage}"/></p>
+                            </aura:If>                       
+                        </div>
+                    </aura:if>
+                    
+                    <aura:if isTrue="{!v.loggedUserSt == 'Draft'}">
+                        <div class="cont-forms draft">
+                            <h1>{!$Label.Atonit_Mktplace.Please_complete_your_registration}</h1>                  
+                        </div>
+                    </aura:if>
+                    
+                    <div class="cont-nav-form">
+                        <ol> 
+                            <li id="nav-form-1" class="nav-form active">{!$Label.Atonit_Mktplace.Company_Information}</li>
+                            <li id="nav-form-2" class="nav-form">{!$Label.Atonit_Mktplace.Contacts}</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="cont-forms">   
+                        <aura:if isTrue="{!v.loggedUserSt != 'notlogged'}">
+                            <div class="changePasswordCont">
+                                <lightning:button class="changePassword_button" label="{!$Label.Atonit_Mktplace.Change_your_password}" title="{!$Label.Atonit_Mktplace.Change_your_password}" onclick="{! c.openModelPassword }" />
+                                <aura:if isTrue="{!v.isModalOpenPassword}">             
+                                    
+                                    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                        <div class="slds-modal__container">
+                                            
+                                            <header class="slds-modal__header">
+                                                <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModelPassword }" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                                                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{!$Label.Atonit_Mktplace.Change_your_password}</h2>
+                                            </header>
+                                            
+                                            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                                <aura:if isTrue="{!v.showError}">
+                                                    <div class="error">
+                                                        <lightning:formattedRichText value="{!v.errorMessageModal}"/>
+                                                    </div>
+                                                </aura:if>                                          
+                                                
+                                                <div id="sfdc_password_container_f2" class="sfdc sfdc_container col-1">
+                                                    <lightning:input type="password" label="New password" value="" aura:id="newPassword" placeholder="Enter Password"  class="field input sfdc_passwordinput sfdc"/>                              
+                                                </div>
+                                                
+                                                <div id="sfdc_confirm_password_container_f2" class="sfdc sfdc_container col-1">
+                                                    <lightning:input type="password" label="Confirm password" value="" aura:id="newConfirmPassword" placeholder="Re-enter Password" class="field input sfdc_passwordinput sfdc"/>
+                                                </div>                                                           
+                                                
+                                            </div>
+                                            
+                                            <footer class="slds-modal__footer">
+                                                <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModelPassword }"/>
+                                                <lightning:button variant="brand" label="OK" title="OK" onclick="{!c.savePassword}"/>
+                                            </footer>
+                                        </div>
+                                    </section>
+                                    <div class="slds-backdrop slds-backdrop_open"></div>
+                                </aura:if>
+                            </div>
+                        </aura:if> 
+                        <div id="form-1" class="form-1 sfdc_form_custom show">        
+                            <h3 class="tit-mobile">{!$Label.Atonit_Mktplace.Company_Information}</h3>                    
+                            <aura:if isTrue="{!v.showError}">
+                                <div class="error">
+                                    <lightning:formattedRichText value="{!v.errorMessage}"/>
+                                </div>
+                            </aura:if> 
+                            
+                            <div class="sfdc sfdc_container col-3">   
+                                <aura:if isTrue="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__Country__c }">
+                                    <lightning:helptext content="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__Country__c}" />
+                                </aura:if>                                
+                                <lightning:select aura:id="Country" label="Country" class="sfdc_custom_select">
+                                    <option value="">Select a country</option>
+                                    <option value="Brazil">Brazil</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Chile">Chile</option>
+                                    <option value="China">China</option>
+                                    <option value="France">France</option>
+                                    <option value="United States">United States</option>
+                                </lightning:select>
+                            </div>
+                            
+                            <div class="sfdc sfdc_container col-3">
+                                <aura:if isTrue="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__Company_Type__c }">
+                                    <lightning:helptext content="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__Company_Type__c}" />
+                                </aura:if>
+                                <lightning:select aura:id="CompanyType" label="Company type" class="sfdc_custom_select">
+                                    <option value="">Select a type</option>
+                                    <option value="Legal Entity">Legal Entity</option>                    
+                                </lightning:select>
+                            </div>    
+                            
+                            <div class="sfdc sfdc_container col-3">                            
+                                <aura:if isTrue="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__Display_Name__c }">
+                                    <lightning:helptext content="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__Display_Name__c}" />
+                                </aura:if>
+                                <lightning:input type="text" label="Display Name" placeholder="Enter Name" aura:id="Name" class="field" value="" maxlength="80" />
+                            </div>
+                            
+                            <div class="sfdc sfdc_container col-3">
+                                <aura:if isTrue="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__State__c }">
+                                    <lightning:helptext content="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__State__c}" />
+                                </aura:if>
+                                <lightning:input type="text" label="State" placeholder="Enter State" aura:id="State" class="field" value="" maxlength="80" />
+                            </div>                                                 
+                            
+                            <div class="sfdc sfdc_container col-3">
+                                <aura:if isTrue="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__City__c }">
+                                    <lightning:helptext content="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__City__c}" />
+                                </aura:if>
+                                <lightning:input type="text" label="City" placeholder="Enter City" aura:id="City" class="field" value="" maxlength="80" />
+                            </div>     
+                            
+                            <div class="sfdc sfdc_container col-3 Notrequired">
+                                <aura:if isTrue="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__Logo__c }">
+                                    <lightning:helptext content="{!v.fieldsHelpText.Atonit_Mktplace__Seller__c_Atonit_Mktplace__Logo__c}" />
+                                </aura:if>
+                                <label>Logo</label>
+                                <span id="Logo_URLEmpty" class="input-file-icon">
+                                    <p id="Logo_URLText">{!$Label.Atonit_Mktplace.Attach_file}</p>                            
+                                </span>
+                                <lightning:input class="slds-file-selector__input uiInput" type="file" multiple="false" name="file" aura:id="Logo_URL" id="Logo_URL" onchange="{!c.validateUploadFile}" />                                
+                                <div id="Logo_URLLinkCont" class="uploaded hide">
+                                    <a id="Logo_URLLink" href="#" target="_blank"></a>
+                                    <img id="Logo_URLRemove" onclick="{!c.removeFile}" src="/sfsites/c/file-asset/delete?v=1" />
+                                </div>
+                            </div>                                                             
+                            
+                            <div class="sfdc sfdc_container col-2">
+                                <aura:if isTrue="{!v.fieldsHelpText.Account_Phone }">
+                                    <lightning:helptext content="{!v.fieldsHelpText.Account_Phone}" />
+                                </aura:if>
+                                <lightning:input type="text" label="Phone" placeholder="Enter Phone" aura:id="Phone" class="field fieldPhone" value="" maxlength="15" />
+                            </div>
+                            
+                            <div class="sfdc sfdc_container col-2">
+                               
+                                    <lightning:input type="text" label="Email" placeholder="Enter Email" aura:id="Email" class="field" value="" maxlength="80" />
+                                                            
+                            </div>
+                                                       
+                            <aura:if isTrue="{!v.loggedUserSt == 'notlogged'}">
+                                <div id="sfdc_password_container_f2" class="sfdc sfdc_container col-2">
+                                    <lightning:input type="password" label="Password" value="" aura:id="password" placeholder="Enter Password" class="field input sfdc_passwordinput sfdc"/>                              
+                                </div>
+                                
+                                <div class="sfdc sfdc_container col-2">
+                                    <lightning:input type="password" label="Confirm password" value="" aura:id="confirmPassword" placeholder="Re-enter Password" class="field input sfdc_passwordinput sfdc"/>
+                                </div>                    
+                            </aura:if>                                  
+
+                            <div class="sfdc sfdc_container terms">
+                                <h3 class="sfdc_form_title">Read carefully the following <a target="_blank" href="/s/terms-and-conditions">terms and conditions</a>  for the use of <strong>Marketplace</strong></h3>
+                                <lightning:input type="checkbox" label="I accept the terms and conditions" name="TermsConditions" aura:id="TermsConditions" value="" checked="" />                    
+                            </div>
+                            
+                            <div class="sfdc sfdc_custom_buttons">
+                                <lightning:button aura:id="formButton-1" label="Next" onclick="{!c.verifyStep}" class="sfdc_button slds-button slds-button_brand slds-button_stateful next"/>
+                            </div>
+                            
+                            <div id="loadingSpinnerContainer1" class="loadingSpinnerContainer hide">
+                                <lightning:spinner alternativeText="Loading" size="small" />
+                            </div>
+                            
+                        </div>
+                        
+                                              
+                        <div id="form-2" class="form-2 hide sfdc_form_custom acc">
+                            <h3 class="tit-mobile">{!$Label.Atonit_Mktplace.Contacts}</h3>                      
+                            <h3 class="sfdc_form_title">Enter the main contacts of your company by area.</h3>                                                
+                            
+                            <div class="cont-contacts" id="contContacts"></div>
+                            
+                            <aura:if isTrue="{!v.showError}">
+                                <div class="error">
+                                    <lightning:formattedRichText value="{!v.errorMessage}"/>
+                                </div>
+                            </aura:if>  
+                            
+                            <lightning:button variant="brand" class="sfdc_button sfdc_button_contacto" label="Add new contact" title="Add new contact" onclick="{! c.openModel }" />
+                            
+                            <aura:if isTrue="{!v.isModalOpen}">             
+                                
+                                <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                                    <div class="slds-modal__container">
+                                        
+                                        <header class="slds-modal__header">
+                                            <lightning:buttonIcon iconName="utility:close" onclick="{! c.closeModel }" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                                            <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Save contact</h2>
+                                        </header>
+                                        
+                                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                                            <aura:if isTrue="{!v.showError}">
+                                                <div class="error">
+                                                    <lightning:formattedRichText value="{!v.errorMessageModal}"/>
+                                                </div>
+                                            </aura:if>  
+                                            
+                                            <div class="Notrequired">
+                                                <lightning:input type="hidden" aura:id="IdContact" value="" />
+                                            </div>
+                                            
+                                            
+                                            <div class="sfdc sfdc_container Notrequired col-2">
+                                                <aura:if isTrue="{!v.fieldsHelpText.Contact_Atonit_Mktplace__Area__c }">
+                                                    <lightning:helptext content="{!v.fieldsHelpText.Contact_Atonit_Mktplace__Area__c}" />
+                                                </aura:if>
+                                                <lightning:select aura:id="Area" label="Area" class="sfdc_custom_select">
+                                                    <option value="">Select an Area</option>
+                                                    <option value='Commercial'>Commercial</option>
+                                                    <option value='Finance'>Finance</option>
+                                                    <option value='Operations'>Operations</option>
+                                                    <option value='TI'>TI</option>
+                                                    <option value='Legal'>Legal</option>
+                                                    <option value='Other'>Other</option>
+                                                </lightning:select>
+                                            </div>
+                                            
+                                            <div class="sfdc sfdc_container Notrequired col-2">
+                                                <aura:if isTrue="{!v.fieldsHelpText.Contact_Atonit_Mktplace__Post__c }">
+                                                    <lightning:helptext content="{!v.fieldsHelpText.Contact_Atonit_Mktplace__Post__c}" />
+                                                </aura:if>
+                                                <lightning:input type="text" label="Post" placeholder="Enter Post" aura:id="Post" class="field" value=""  maxlength="80" />
+                                            </div>                                                                                                                               
+                                            
+                                            <div class="sfdc sfdc_container col-1">
+                                                <aura:if isTrue="{!v.fieldsHelpText.Contact_LastName }">
+                                                    <lightning:helptext content="{!v.fieldsHelpText.Contact_LastName}" />
+                                                </aura:if>
+                                                <lightning:input type="text" label="Name" placeholder="Enter Name" aura:id="LastName" class="field" value="" maxlength="80" />
+                                            </div> 
+                                            
+                                            <div class="sfdc sfdc_container Notrequired col-2">
+                                                <aura:if isTrue="{!v.fieldsHelpText.Contact_MobilePhone }">
+                                                    <lightning:helptext content="{!v.fieldsHelpText.Contact_MobilePhone}" />
+                                                </aura:if>
+                                                <lightning:input type="text" label="Mobile" placeholder="Enter Mobile" aura:id="MobilePhone" class="field fieldPhone" value="" maxlength="15" />
+                                            </div>
+                                            
+                                            <div class="sfdc sfdc_container col-2">
+                                                <aura:if isTrue="{!v.fieldsHelpText.Contact_Email }">
+                                                    <lightning:helptext content="{!v.fieldsHelpText.Contact_Email}" />
+                                                </aura:if>
+                                                <lightning:input type="text" label="Email" placeholder="Enter Email" aura:id="EmailContact" class="field" value="" maxlength="80" />
+                                            </div>                                
+                                            
+                                        </div>
+                                        
+                                        <footer class="slds-modal__footer">
+                                            <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.closeModel }"/>
+                                            <lightning:button variant="brand" label="Save contact" title="Save contact" onclick="{!c.saveContact}"/>
+                                        </footer>
+                                    </div>
+                                </section>
+                                <div class="slds-backdrop slds-backdrop_open"></div>
+                            </aura:if>
+                            
+                            <div class="sfdc sfdc_custom_buttons">
+                                <aura:if isTrue="{!v.loggedUserSt != 'notlogged'}">
+                                    <lightning:button aura:id="backButton-3" label="Back" onclick="{!c.changeStepbackwards}" class="sfdc_button sfdc_button_back back"/>
+                                </aura:if>
+                                <lightning:button aura:id="formButton-2" label="Next" onclick="{!c.verifyStep}" class="sfdc_button next"/>                        
+                            </div>
+                            
+                            <div id="loadingSpinnerContainer2" class="loadingSpinnerContainer hide">
+                                <lightning:spinner alternativeText="Loading" size="small" />
+                            </div>
+                            
+                        </div>
+                                                                                                                        
+                        
+                    </div>
+                </div>
+                
+            </aura:if>
+            <aura:if isTrue="{!v.loggedUserSt == 'Pending'}">
+                <div class="cont-forms log">
+                    <h1>{!$Label.Atonit_Mktplace.Pending_approval}</h1>
+                    {!$Label.Atonit_Mktplace.Registration_approval_text}                    
+                </div>
+            </aura:if>   
+            
+        </div> 
+    </div>
+    
+</aura:component>

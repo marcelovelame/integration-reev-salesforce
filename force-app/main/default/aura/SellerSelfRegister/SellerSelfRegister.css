@@ -1,0 +1,802 @@
+.THIS *{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.THIS .sfdc_form_wrap{
+    display: table;
+    width: 100%;
+}
+
+.THIS .cont-register{
+    margin: 60px 0px;
+}
+.THIS #sfdc_username_container{
+    margin-bottom:10px;
+    padding: 12px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS #sfdc_nickname_container{
+    margin-bottom:10px;
+    padding: 12px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS #sfdc_email_container{
+    margin-bottom:10px;
+    padding: 12px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS #sfdc_extrafield_container{
+    margin-bottom:10px;
+    padding: 12px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS #sfdc_user{
+    float:left;
+    width:23px;
+    height:25px;
+    padding-top:1px;
+    padding-left:2px;
+    margin:0px;
+
+}
+
+.THIS #sfdc_lock{
+    float:left;
+    width:23px;
+    height:25px;
+    padding-top:1px;
+    padding-left:2px;
+    margin:0px;
+}
+
+.THIS  .login-icon {
+    color:#ccc;font-size:22px;
+}
+
+.THIS #sfdc_password_container{
+    margin-bottom:10px;
+    padding: 12px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS #sfdc_confirm_password_container{
+    padding: 12px;
+    background-color:white;
+    border: 1px solid #CCC;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+}
+
+.THIS .sfdc_custom_buttons{
+    clear: both;
+    text-align: center;
+}
+
+.THIS  button.sfdc_button {
+    width: 200px;
+    color: #FFF;
+    background-color: #FC2791;
+    text-align: center;
+    vertical-align: middle;
+    background-image: none;
+    white-space: nowrap;
+    padding: 10px 12px;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.42857143;
+    border-radius: 20px;
+    border: 2px solid #FC2791;
+    padding: 10px 0px;
+    display: inline-table;
+}
+
+
+.THIS  button.sfdc_button_back{
+    margin-right: 20px;
+    background-color: #f1f1fa;
+    border: 2px solid #f1f1fa;
+    color: #fc2791;
+}
+
+.THIS  button.sfdc_button_contacto{
+    margin: 0 auto 20px auto;
+    background-color: #fff;
+    border: 1px solid #7bbc57;
+    color: #7bbc57;
+    width: auto;
+    padding: 10px 38px;
+    display: table;
+}
+
+.THIS  button:hover {
+    background-color:#FFF;
+    border: 2px solid #FC2791;
+    color: #FC2791;
+    cursor:pointer;
+}
+
+.THIS  button.sfdc_button_back:hover{
+    border: 2px solid #fc2791;
+}
+
+.THIS  button.sfdc_button_contacto:hover{
+    background-color:#7BBC57;
+    border: 1px solid #7BBC57;
+    color: #FFF;
+}
+
+.THIS lightning-input.field div input{
+    margin-top: 3px;
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 20px;
+    -webkit-appearance: none;
+    font-size: 16px;
+    padding: 6px 15px;
+    height: auto;
+    width: 100%;
+}
+
+.THIS  select.slds-select {
+    background: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-size: 16px;
+    height: auto;
+    width: 100%;
+    outline: none;
+}
+
+.THIS #sfdc_forgot{
+    font-family: 'Open Sans', 'sans-serif';
+    font-weight:300;
+    font-size: 14px;
+    margin-top: 10px
+}
+
+.THIS .sfdc_form_title{
+    color: #555555;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.THIS  #error {
+    text-align: center;
+    color:#FF0000;
+}
+
+.THIS  a {
+    color:white;
+    text-decoration: none;
+}
+.THIS  a:hover {
+    color:white;
+    text-decoration: none;
+}
+
+.THIS label.checkbox-label{
+    margin: 10px auto 25px auto !important;
+    display: table;
+}
+
+.THIS input[type="checkbox"] {
+    appearance: none;
+    border: 1px solid #555555;
+    border-radius: 50px;
+    height: 22px;
+    width: 22px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.THIS input[type="checkbox"]:checked:after {
+    display: block;
+    position: relative;
+    content: '';
+    left: 5px;
+    top: 5px;
+    height: 6px;
+    width: 10px;
+    border-bottom: 4px solid green;
+    border-left: 4px solid green;
+    transform: rotate(-45deg);
+}
+
+.THIS input[type="checkbox"].disabled {
+    opacity: 0.35;
+}
+
+.THIS input[type="checkbox"] + label {
+    vertical-align: middle;
+}
+
+.THIS .slds-radio_faux{
+    cursor: pointer;
+}
+
+.THIS span.slds-radio{
+    float: left;
+    width: 30%;
+    border: 1px solid #DDDDDD;
+    border-radius: 50px;
+    margin-left: 3%;
+    padding: 10px 10px;
+}
+
+.THIS span.slds-radio label .slds-form-element__label{
+    font-size: 16px;
+    color: #555555;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.THIS fieldset{
+    margin-bottom: 30px;
+    border-bottom: 1px solid #DDDDDD;
+    padding-bottom: 30px;
+}
+
+.THIS .slds-radio_faux:after{
+    background-color: #F2A700 !important;
+}
+
+.THIS .slds-select_container:before{
+    content: '˯';
+    color: #555555;
+    border: none;
+    font-size: 52px;
+    top: -43px;
+    right: 31px;
+}
+
+.THIS .sfdc_custom_select.multiple,
+.THIS .sfdc_custom_select.multiple:focus{
+    display: block;
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 20px;
+    -webkit-appearance: none;
+    font-size: 16px;
+    padding: 15px;
+    width: 99%;
+    margin: 0px;
+    overflow: auto;
+    outline: none;
+    text-transform: lowercase;
+}
+
+.THIS .slds-select_container::after{
+    border: none;
+}
+
+.THIS .cont-nav-form{
+    clear: right;
+    float: left;
+    width: 20%;
+}
+
+.THIS .clr{
+    clear: left;
+}
+
+.THIS .col-3{
+    float: left;
+    width: 30%;
+    margin-right: 3%;
+    margin-bottom: 30px; 
+    position: relative;   
+}
+
+.THIS .col-2{
+    float: left;
+    width: 49%;
+    margin-right: 1%;
+    margin-bottom: 30px; 
+    position: relative;   
+}
+
+.THIS .col-1{
+    clear: both;
+    width: 100%;
+    margin-bottom: 30px;
+    position: relative; 
+}
+
+.THIS .cont-forms{
+    float: left;
+    width: 80%;
+    background-color: #FFF;
+    border-radius: 10px;
+    padding: 40px 30px;
+}
+
+.THIS .cont-forms.log{
+    width: 30%;
+    padding: 80px 30px;
+    float: none;
+    margin: 40px auto;
+}
+
+.THIS .cont-forms.log a{
+	color: #000;
+    text-decoration: underline;
+}
+
+.THIS .cont-forms.not-approved,
+.THIS .cont-forms.draft{
+    float: right;
+    margin-bottom: 40px;
+}
+
+.THIS .cont-forms.not-approved h1{
+    color: #FF0000;
+}
+
+.THIS .cont-forms.not-approved p{
+    color: #FF0000;
+    margin-top: 10px;
+}
+
+.THIS .log h1{
+    margin: 0px 0px 20px 0px;
+}
+
+.THIS .cont-forms label{
+    color: #555555;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left:10px;
+}
+
+.THIS ol li{
+    counter-increment: level1;
+    color: #555555;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.THIS ol li:before {
+    content: counter(level1) " ";
+    background-color: #FFF;
+    color: #999999;
+    font-size: 25px;
+    border-radius: 50px;
+    border: 1px solid #999999;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 15px;
+}
+
+.THIS .show{
+    display: initial;
+}
+
+.THIS .hide{
+    display: none;
+}
+
+.THIS li.active:before{
+    background-color: #555555;
+    color: #FFF;
+    border: none;
+}
+
+.THIS .terms{
+    clear: both;
+    text-align: center;
+}
+
+.THIS .terms h4{
+    color: #109D48;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.THIS .terms p{
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.THIS .terms a{
+    color: #FC2791;
+}
+
+.THIS .terms a:hover{
+    text-decoration: underline;
+}
+
+/* .THIS input#TermsConditions:after {
+    content: '*';
+    float: right;
+    position: relative;
+    right: -9px;
+    color: red;
+} */
+
+.THIS .input-file-icon img{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+
+.THIS .input-file-icon p{
+    float: left;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 89%;
+    text-align: left;
+}
+
+.THIS div.error{
+    margin: 10px 0;
+    color: red;
+    text-align: center;
+    font-weight: 600;
+}
+
+.THIS option:first-of-type{
+    color: rgb(170, 170, 170);
+    margin-bottom: 10px;
+}
+
+.THIS .cont-contacts{
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 30px;
+}
+
+.THIS .bl-contacts{
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px 20px;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.THIS .bl-contacts img.user{
+    width: 30px;
+    float: left;
+    margin-right: 20px;
+    margin-top: 15px;
+}
+
+.THIS .bl-contacts .dados-contact{
+    float: left;
+}
+
+.THIS .bl-contacts .dados-contact .cn{
+    color: #555555;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.THIS .bl-contacts .dados-contact .cc{
+    color: #555555;
+    font-size: 14px;
+}
+
+.THIS .bl-contacts .dados-contact .ca{
+    color: #999999;
+    font-size: 14px;
+}
+
+.THIS .bl-contacts .actions-contact{
+    float: right;
+}
+
+.THIS .bl-contacts .actions-contact img{
+    width: 17px;
+    margin-top: 17px;
+    cursor: pointer;
+}
+
+.THIS .bl-contacts .actions-contact .edit-contact{
+    width: 24px;
+    margin-right: 25px;
+}
+
+.THIS .placePhone{
+    position: absolute;
+    top: 24px;
+    font-size: 16px;
+    left: 0px;
+    border-right: 2px solid #e9e9e9;
+    padding: 10px 10px;
+    border-radius: 50px 0px 0px 50px;
+}
+
+.THIS .sfdc_form_custom.terms,
+.THIS .sfdc_form_custom.acc{
+    position: relative;
+}
+
+.THIS .overlayLoad{
+    position: absolute;
+    background: rgba(255,255,255,0.7);
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    z-index: 10;
+}
+
+.THIS lightning-helptext{
+    position: absolute;
+    right: 0;
+    top: 3px;
+}
+
+.THIS lightning-helptext button:hover{
+    border: 1px solid #fff;
+}
+
+.THIS .tit-mobile{
+    display: none;
+}
+
+.THIS h1{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.THIS label:before {
+    content: '*';
+    color: red;
+    margin-right: 2px;
+}
+
+.THIS .checkbox-label:before,
+.THIS .Notrequired label:before{
+    content: '';
+}
+
+/**
+** SMALL DEVICES
+**/
+@media (max-width: 768px) {
+    .THIS .cont-nav-form,
+    .THIS .cont-forms{
+        float: none;
+        width: auto;
+        display: table;
+        margin: 0 auto;
+    }
+    .THIS .cont-forms{
+        padding: 40px 10px;
+    }
+    .THIS .cont-forms.log{
+        width: 90%;
+    }
+    .THIS .tit-mobile{
+        display: unset;
+    }
+    .THIS ol li{
+        font-size: 0px;
+        float: left;
+    }
+    .THIS ol li:before{
+        margin-right: 5px;
+    }
+    .THIS h3.tit-mobile{
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        display: table;
+    }
+    .THIS .sfdc_form_wrap{
+        margin: 35px 0;
+    }
+    .THIS .col-2,
+    .THIS .col-3,
+    .THIS .col-1{
+        width: 100%;
+        margin-right: 0px;
+    }
+    .THIS  button.sfdc_button {
+        width: 100%;
+        margin-bottom: 28px;
+    }
+    .THIS .input-file-icon{
+        top: 29px;
+    }
+    .THIS .cont-forms label{
+        font-size: 12px;
+    }
+    
+    .THIS .cont-forms.not-approved, 
+    .THIS .cont-forms.draft{
+        clear: both;
+        width: 100%;
+    }
+}
+
+.THIS .ms-filter-input{
+    margin: 0px 5%;
+    width: 50%;
+    height: 30px;
+    border-radius: 2px;
+    border-style: solid;
+    border-width: thin;
+    border-color: darkgray;
+    padding: 2px 5px;
+}
+
+.THIS .ms-input{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(217, 219, 221);
+    border-radius: .25rem;
+    width: 100%;
+    transition: border .1s linear,background-color .1s linear;
+    display: inline-block;
+    padding: 0 1rem 0 .75rem;
+    line-height: 1.875rem;
+    min-height: calc(1.875rem + (1px * 2));
+}
+
+.THIS .ms-refresh-icon{
+    position: absolute;
+}
+
+.THIS .ms-clear-icon{
+    position: absolute;
+}
+
+.THIS .ms-dropdown{
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.THIS .cMultiSelect .ms-input {
+    border: 1px solid #DDDDDD;
+    box-sizing: border-box;
+    border-radius: 20px;
+    -webkit-appearance: none;
+    font-size: 16px;
+    width: 99%;
+    margin: 0px;
+    overflow: auto;
+    outline: none;
+    text-transform: lowercase;
+}
+
+.THIS .slds-listbox{
+    width: 99%;
+}
+
+/* changes */
+.THIS .cSelfRegister label.slds-file-selector__body::before {
+    content: '';
+}
+
+.THIS .input-file-icon{
+    position: absolute;
+    top: 26px;
+    width: 91%;
+    background-color: #fff;
+    left: 13px;
+    text-align: right;
+    pointer-events: none;
+    z-index: 10;
+    padding: 9px 0;
+    border-radius: 10px;
+}
+
+.THIS .slds-file-selector{
+    width: 100%;
+}
+
+.THIS .slds-file-selector__dropzone{
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 5px 0;
+    margin-top: 3px;
+    width: 100%;
+    outline: none;
+}
+
+.THIS .slds-file-selector__input span.slds-assistive-text,
+.THIS .slds-file-selector__input span.slds-form-element__label{
+    display: none;
+}
+
+.THIS .uploaded {
+    width: 100%;
+    padding: 10px 20px 4px 20px;
+    margin-top: 3px;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+.THIS .uploaded a {
+    color: blue;
+    font-size: 16px;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.THIS .uploaded img {
+    float: right;
+    width: 15px;
+    cursor: pointer;
+}
+
+.THIS .cSelfRegister .tooltip .tooltiptext{
+    z-index: 10;
+}
+
+.THIS .back{
+    float: left;
+}
+
+.THIS .next{
+    float: right;
+}
+
+.THIS .changePassword_button{
+    float: right;
+    background-color: #fff;
+    border: 2px solid #FC2791;
+    color: #FC2791;
+    width: auto;
+    padding: 5px 15px;
+    border-radius: 20px;
+    position: relative;
+    top: -20px;
+}
+
+.THIS .changePassword_button:after{
+    content: '';
+    background: url('/sellercenter/file-asset/changepassword?v=1');
+    display: inline-table;
+    width: 20px;
+    height: 18px;
+    background-size: cover;
+    margin-left: 10px;
+}
+
+.THIS .changePasswordCont{    
+    clear: both;
+    display: table;
+    width: 100%;
+}
